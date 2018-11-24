@@ -1,0 +1,98 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "MkdirBuild",
+            "type": "shell",
+            "command": "mkdir",
+            "args":["-p", "build"]
+        },
+        {
+            "label": "CMakeGen",
+            "type": "shell",
+            "command": "cmake",
+            "presentation": {
+                "reveal": "always",
+                "clear": true
+            },
+            "args": [
+                "-G",
+                "'Unix Makefiles'",
+                "-DCMAKE_BUILD_TYPE=DEBUG",
+                "${workspaceRoot}"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "dependsOn": [
+                "CMakeGen"
+            ],
+            "label": "Build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "args": [
+                "--build",
+                "build",
+                "--config",
+                "Debug",
+                "--target",
+                "all",
+                "--",
+                "-j",
+                "8"
+            ],
+            "command": "cmake",
+            "presentation": {
+                "reveal": "always",
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "dependsOn": [
+                "Build"
+            ],
+            "label": "Run",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/bin"
+            },
+            "command": "./astar",
+            "presentation": {
+                "reveal": "always"
+            },
+            "problemMatcher": []
+        },
+        
+        {
+            "dependsOn": [
+                "Build"
+            ],
+            "label": "Test",
+            "type": "shell",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "command": "ctest",
+            "args": [
+                "-V"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}
