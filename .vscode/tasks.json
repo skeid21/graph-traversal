@@ -7,16 +7,18 @@
             "label": "MkdirBuild",
             "type": "shell",
             "command": "mkdir",
-            "args":["-p", "build"]
+            "args": [
+                "-p",
+                "build"
+            ]
         },
         {
+            "dependsOn": [
+                "MkdirBuild"
+            ],
             "label": "CMakeGen",
             "type": "shell",
             "command": "cmake",
-            "presentation": {
-                "reveal": "always",
-                "clear": true
-            },
             "args": [
                 "-G",
                 "'Unix Makefiles'",
@@ -25,6 +27,14 @@
             ],
             "options": {
                 "cwd": "${workspaceRoot}/build"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
             },
             "problemMatcher": []
         },
@@ -50,12 +60,18 @@
                 "8"
             ],
             "command": "cmake",
-            "presentation": {
-                "reveal": "always",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
             },
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            }
         },
         {
             "dependsOn": [
@@ -66,13 +82,8 @@
             "options": {
                 "cwd": "${workspaceRoot}/build/bin"
             },
-            "command": "./astar",
-            "presentation": {
-                "reveal": "always"
-            },
-            "problemMatcher": []
+            "command": "./astar"
         },
-        
         {
             "dependsOn": [
                 "Build"
@@ -89,9 +100,6 @@
             ],
             "options": {
                 "cwd": "${workspaceRoot}/build"
-            },
-            "presentation": {
-                "reveal": "always"
             }
         }
     ]

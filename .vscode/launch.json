@@ -13,7 +13,12 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "MIMode": "lldb"
+            "MIMode": "lldb",
+            "setupCommands": [{
+                "text": "-enable-pretty-printing", 
+                "description": "enable pretty printing", 
+                "ignoreFailures": true 
+            }]
         },
         {
             "name": "Launch-UnitTests",
@@ -24,7 +29,12 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "MIMode": "lldb"
+            "MIMode": "lldb",
+            "setupCommands": [{
+                "text": "-enable-pretty-printing", 
+                "description": "enable pretty printing", 
+                "ignoreFailures": true 
+            }]
         }
     ]
 }
